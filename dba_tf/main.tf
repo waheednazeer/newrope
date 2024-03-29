@@ -29,4 +29,17 @@ resource "google_sql_user" "user1" {
     instance = google_sql_database_instance.instance_postgres.name
     password = "Passw0rd!"
   }
-  
+ /* Firewall rules*/ 
+resource "google_compute_firewall" "rules" {
+  name        = "db-rule"
+  network     = "default"
+  description = "mysql port=3306, postgres port=5432, mssql port=1433"
+
+  allow {
+    protocol  = "tcp"
+    ports     = ["80", "8080", "1000-2000", "5432", "3306", "1433"]
+  }
+
+  source_tags = ["db"]
+  target_tags = ["web"]
+}
