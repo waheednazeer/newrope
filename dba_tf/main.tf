@@ -37,7 +37,7 @@ resource "google_compute_firewall" "rules" {
 
   allow {
     protocol  = "tcp"
-    ports     = ["80", "8080", "1000-2000", "5432", "3306", "1433"]
+    ports     = ["5432", "3306", "1433"] # range of port can be added "1000-2000"
   }
 
   source_tags = ["db"]
